@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.2/svg.min.js" integrity="sha512-I+rKw3hArzZIHzrkdELbKqrXfkSvw/h0lW/GgB8FThaBVz2e5ZUlSW8kY8v3q6wq37eybIwyufkEZxe4qSlGcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-9" id="artcanvas">
+          </div>
+          <div class="col-3 p-3" id="controlpanel">
+              <select class="form-select liveoption mb-3" aria-label="Default select example" name="type">
+                  <option value="lines" selected>Lines</option>
+                  <option value="circles">Rings</option>
+              </select>
+              <label for="blobs" class="form-label">Number of lines/rings:</label>
+              <input type="range" class="form-range liveoption" id="blobs" name="blobs">
+              <label for="displacement" class="form-label">Displacement:</label>
+              <input type="range" class="form-range liveoption" id="displacement" name="displacement">
+              <label for="resolution" class="form-label">Resolution:</label>
+              <input type="range" class="form-range liveoption" id="resolution" name="resolution">
+              <div class="form-check py-3">
+                  <input class="form-check-input liveoption" type="checkbox" name="animate" value="animate" id="animate">
+                  <label class="form-check-label" for="animate">
+                    Animate
+                  </label>
+              </div>
+              <button type="button" class="btn btn-primary mt-3" id="svgdownload">Download SVG</button>
+
+
+          </div>
+      </div>
+  </div>
+	<script src="posters.js"></script>
+  </body>
+</html>
