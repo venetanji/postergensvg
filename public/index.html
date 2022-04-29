@@ -22,16 +22,16 @@
           </div>
           <div class="col-3 p-3" id="controlpanel">
               <label for="template" class="form-label">Template:</label>
-              <select id="templateselector" class="form-select liveoption mb-3" aria-label="Font" name="template"></select>
+              <select id="templateselector" class="form-select liveoption mb-2" aria-label="Font" name="template"></select>
               <div class="form-group">
                 <label for="hfont" class="form-label">Header Font</label>
+                <a id="hfontlink" class="float-end" href="#link">See font on googlefonts</a>
                 <select id="hfontselector" class="fontselector form-select liveoption mb-1" aria-label="Font" name="hfont"></select>
-                <a id="hfontlink" href="#link">See font on googlefonts</a>
               </div>
               <div class="form-group">
-                <label for="bfont" class="form-label mt-3">Body Font</label>
+                <label for="bfont" class="form-label mt">Body Font</label>
+                <a id="bfontlink" class="float-end" href="#link" >See font on googlefonts</a>
                 <select id="bfontselector" class="fontselector form-select liveoption mb-1" aria-label="Font" name="bfont"></select>
-                <a id="bfontlink" href="#link" >See font on googlefonts</a>
               </div>
               <div class="form-group">
                 <label for="baseFontSize" class="form-label  mt-3">Font Size</label>
@@ -45,9 +45,11 @@
                 <label for="fgh" class="form-label">Color Hue:</label>
                 <input type="range" class="form-range liveoption" id="fgh" name="fgh" min="0" max="3.14" step="0.01">
                 <label for="fgs" class="form-label">Color Shift:</label>
-                <input type="range" class="form-range liveoption" id="fgs" name="fgs" min="0" max="3.14" step="0.01">
+                <input type="range" class="form-range liveoption mb-3" id="fgs" name="fgs" min="0" max="3.14" step="0.01">
               </div>
-              <button type="button" class="btn btn-primary mt-3" id="svgdownload">Download SVG</button>
+              <button type="button" class="btn btn-primary " id="svgdownload">Download SVG</button>
+              <a class="float-end" href="https://github.com/venetanji/postergensvg">Source Code</a>
+
           </div>
       </div>
   </div>
