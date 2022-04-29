@@ -9,7 +9,7 @@ document.querySelectorAll('.liveoption').forEach(item => {
 })
 
 document.querySelector('#svgdownload').addEventListener('click', e => {
-    save(`postergen - ${Date.now()}`)
+    saveSVG(`postergen - ${Date.now()}`)
 })
 
 const makePoster = (template) => {
@@ -122,6 +122,7 @@ function addFont (family) {
 }
 
 function draw() {
+    clear()
     let bgimage = options.bgimage 
 
     addFont(options.hfont)
