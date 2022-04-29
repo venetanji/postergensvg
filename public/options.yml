@@ -1,0 +1,6 @@
+baseFontSize: 45
+hmargin: 10
+template: printshop
+linesRatio: 0.18
+footerRatio: 0.18
+maxImages: 20

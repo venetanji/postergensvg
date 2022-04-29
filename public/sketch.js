@@ -1,58 +1,3 @@
-
-templates = {
-    printshop: {
-        header: {
-            title: "Printshop",
-            subtitle: "Helper Wanted!"
-        },
-        body: {
-            title: "Requirements",
-            lines: [
-                "Full-time Student @ PolyU School of Design",
-                "Willing to learn new skills & help other students",
-                "Qualified students will be selected to work during week 12-16",
-                "Good time management to fulfill the following:",
-                "A 4-hour intensive training session + skill test (week 3-6)",
-            ],
-            indentedLines: [
-                " -  Basic knowledge in printing",
-                " -  Basic bookbinding",
-                " -  Large scale printing",
-                " -  Cutting machine operation"
-            ]
-        }
-    },
-
-    photography: {
-        header: {
-            title: "Photography Studio",
-            subtitle: "Helper Wanted!"
-        },
-        body: {
-            title: "Requirements",
-            lines: [
-                "Full-time Student @ PolyU School of Design",
-                "Willing to learn new skills & help other students",
-                "Qualified students will be selected to work during week 12-16",
-                "Good time management to fulfill the following:",
-                "A 4-hour intensive training session + skill test (week 3-6)",
-            ],
-            indentedLines: [
-                " -  Basic knowledge in Photography",
-                " -  Lighting set up",
-                " -  Black & white film processing",
-                " -  Dark room facility operation"
-            ]
-        }
-    }
-}
-
-options = {
-    baseFontSize: 45,
-    hmargin: 10,
-    template: "printshop"
-}
-
 document.querySelectorAll('.liveoption').forEach(item => {
     item.addEventListener('input', function (e) {
         options[e.target.name] = e.target.value;
@@ -71,8 +16,8 @@ const makePoster = (template) => {
 
     let baseFontSize = parseInt(options.baseFontSize)
     let subtitleRatio = .7
-    let footerRatio = 0.18
-    let linesRatio = 0.18
+    let footerRatio = parseFloat(options.footerRatio)
+    let linesRatio = parseFloat(options.linesRatio)
     let skillsRatio = linesRatio*.9
     let skillSize = baseFontSize*skillsRatio
     let requirementSize = baseFontSize*.7
@@ -94,7 +39,7 @@ const makePoster = (template) => {
         },
 
         footer: {
-            text: "Apply Before 19 October 2022.\nFor more details please contact Digital Printshop, 8th Floor",
+            text: template.footer,
             size: baseFontSize*footerRatio
         }
     }
@@ -102,9 +47,6 @@ const makePoster = (template) => {
 const head = document.getElementsByTagName('HEAD')[0]; 
 const hfontselector = document.getElementById('hfontselector')
 const bfontselector = document.getElementById('bfontselector')
-const fontsizeselector = document.getElementById('baseFontSize')
-const bgselector = document.getElementById('bgimage')
-const offsetselector = document.getElementById('offsettop')
 const tplselector = document.getElementById('templateselector')
 
 async function loadfonts() {
@@ -115,21 +57,32 @@ async function loadfonts() {
     return a.items.map(e => e.family)
 }
 
+let options = {}
+let templates = {}
 async function setup() {
     //console.log(gfonts)
+    options = await fetch('options.yml')
+        .then(response => response.text())
+        .then(data => { return jsyaml.load(data) })    
+
+    templates = await fetch('templates.yml')
+        .then(response => response.text())
+        .then(data => { return jsyaml.load(data) })
+
     fontnames = await loadfonts()
 
     options.hfont = random(fontnames)
     options.bfont = random(fontnames)
-    options.bgimage = parseInt(random(1,38))
+    options.bgimage = parseInt(random(1,options.maxImages))
     options.offsettop = random(options.hmargin,200)
-    options.fgc = random(PI)
+    options.fgh = random(PI)
+    options.fgs = random(PI)
 
-
-    bgselector.value = options.bgimage   
-    fontsizeselector.value = options.baseFontSize
-    offsetselector.value = options.offsettop
-    offsettop.value = options.offsettop
+    displayOptions = ["fgh","fgs","bgimage","linesRatio","offsettop","baseFontSize"]
+    displayOptions.forEach(e => {
+        document.getElementById(e).value = options[e]
+    })
+    document.getElementById("bgimage").max = options.maxImages
 
     fontnames.forEach(family => {
         var fontoption = document.createElement("option");
@@ -157,7 +110,10 @@ async function setup() {
     noLoop()
 }
 
+loadedfonts = []
 function addFont (family) {
+    if (loadedfonts.includes(family)) return
+    loadedfonts.push(family)
     var link = document.createElement('link');
     link.rel = 'stylesheet'; 
     link.type = 'text/css';
@@ -173,11 +129,11 @@ function draw() {
     addFont(options.bfont)
     document.querySelector('#bfontlink').href = `https://fonts.google.com/specimen/${options.bfont}`
 
-    loadImage(`http://localhost:3000/images/${bgimage}.png`, img => {
+    loadImage(`/images/${options.template}/${bgimage}.png`, img => {
         background(img);
         poster = makePoster(templates[options.template])
-        fgh = parseFloat(options.fgc);
-        bgh = (fgh - QUARTER_PI) % PI
+        fgh = parseFloat(options.fgh);
+        bgh = (fgh - parseFloat(options.fgs)) % PI
         y = parseInt(options.offsettop)
         hmargin = 10
         rectMode(CENTER)
@@ -207,7 +163,7 @@ function drawHeader(header) {
 }
 
 function drawBody(body) {
-    const totalsize = body.title.size + body.lines.reduce((sum,a) => sum + a.size,0) + 2*hmargin + (body.lines.length*hmargin)
+    const totalsize = body.title.size + body.lines.reduce((sum,a) => sum + a.size*body.lineHeight,0) + 2*hmargin + (body.lines.length*hmargin)
     
     fill(bgh, 10, 80, .9)
     stroke(bgh, 50, 100, .8)

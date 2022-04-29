@@ -1,0 +1,60 @@
+printshop:
+  header:
+    title: Printshop
+    subtitle: Helper Wanted!
+  body:
+    title: Requirements
+    lines:
+      - Full-time Student @ PolyU School of Design
+      - Willing to learn new skills & help other students
+      - Qualified students will be selected to work during week 12-16
+      - 'Good time management to fulfill the following:'
+      - A 4-hour intensive training session + skill test (week 3-6)
+    indentedLines:
+      - ' -  Basic knowledge in printing'
+      - ' -  Basic bookbinding'
+      - ' -  Large scale printing'
+      - ' -  Cutting machine operation'
+  footer: |-
+    Apply Before 19 October 2022.
+    For more details please contact Digital Printshop, 8th Floor
+photography:
+  header:
+    title: Photography Studio
+    subtitle: Helper Wanted!
+  body:
+    title: Requirements
+    lines:
+      - Full-time Student @ PolyU School of Design
+      - Willing to learn new skills & help other students
+      - Qualified students will be selected to work during week 12-16
+      - 'Good time management to fulfill the following:'
+      - A 4-hour intensive training session + skill test (week 3-6)
+    indentedLines:
+      - ' -  Basic knowledge in Photography'
+      - ' -  Lighting set up'
+      - ' -  Black & white film processing'
+      - ' -  Dark room facility operation'
+  footer: |-
+    Apply Before 19 October 2022.
+    For more details please contact Digital Printshop, 8th Floor
+3dprintlab:
+  header:
+    title: 3D Printer Lab
+    subtitle: Helper Wanted!
+  body:
+    title: Requirements
+    lines:
+      - Full-time Student @ PolyU School of Design
+      - Willing to learn new skills & help other students
+      - Qualified students will be selected to work during week 12-16
+      - 'Good time management to fulfill the following:'
+      - A 4-hour intensive training session + skill test (week 3-6)
+    indentedLines:
+      - ' -  Basic knowledge in 3D printing'
+      - ' -  Using tools ...'
+      - ' -  Knowing about plastics and stuff'
+      - ' -  Add more in the template file'
+  footer: |-
+    Apply Before 19 October 2022.
+    For more details please contact Digital Printshop, 8th Floor
