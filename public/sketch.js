@@ -9,7 +9,7 @@ document.querySelectorAll('.liveoption').forEach(item => {
 })
 
 document.querySelector('#svgdownload').addEventListener('click', e => {
-    saveSVG(`postergen - ${Date.now()}`)
+    save(`postergen - ${Date.now()}`)
 })
 
 const makePoster = (template) => {
@@ -134,10 +134,12 @@ function draw() {
         background(img);
         poster = makePoster(templates[options.template])
         fgh = parseFloat(options.fgh);
-        bgh = (fgh - parseFloat(options.fgs)) % PI
+        bgh = PI + (fgh - parseFloat(options.fgs)) % PI
         y = parseInt(options.offsettop)
-        hmargin = 10
+        hmargin = parseInt(options.hmargin)
+        vmargin = parseInt(options.vmargin)
         rectMode(CENTER)
+        textAlign(LEFT, BOTTOM);
         strokeWeight(.1)
         textFont(options.hfont);
         drawHeader(poster.header)
@@ -151,20 +153,20 @@ function draw() {
 function drawHeader(header) {
     fill(bgh, 10, 80, .6)
     stroke(bgh, 50, 100, .8)    
-    const totalsize = header.title.size + header.subtitle.size + 3*hmargin
+    const totalsize = header.title.size + header.subtitle.size*1.4 + 4*vmargin
     
     rect(width/2, y + totalsize/2, width , totalsize);
 
     fill(fgh, 80, 50 , .9)
     stroke(fgh, 100, 70, 1)
     textSize(header.title.size);
-    text(header.title.text, hmargin+ width/2, y, width - (2*hmargin))
+    text(header.title.text, hmargin+ width/2, y + textAscent() + textDescent(), width - (2*hmargin))
     textSize(header.subtitle.size);
-    text(header.subtitle.text, hmargin+ width/2, y+header.title.size+hmargin, width - (2*hmargin))
+    text(header.subtitle.text, hmargin+ width/2, y+header.title.size+vmargin+ textAscent() + textDescent(), width - (2*hmargin))
 }
 
 function drawBody(body) {
-    const totalsize = body.title.size + body.lines.reduce((sum,a) => sum + a.size*body.lineHeight,0) + 2*hmargin + (body.lines.length*hmargin)
+    const totalsize = body.title.size*body.lineHeight + body.lines.reduce((sum,a) => sum + a.size*body.lineHeight,0) + 3*vmargin + (body.lines.length*vmargin)
     
     fill(bgh, 10, 80, .9)
     stroke(bgh, 50, 100, .8)
@@ -173,9 +175,9 @@ function drawBody(body) {
     fill(fgh, 80, 50 , .9)
     stroke(fgh, 100, 70, 1)
     textSize(body.title.size);
-    const bodyStart = height - totalsize + hmargin
-    text(body.title.text, hmargin+ width/2, bodyStart, width - (2*hmargin))
-    let lineStart = bodyStart + body.title.size + 2*hmargin
+    const bodyStart = height - totalsize + vmargin + body.title.size*body.lineHeight
+    text(body.title.text, hmargin+ width/2 , bodyStart, width - (2*hmargin))
+    let lineStart = bodyStart + body.lines[0].size*body.lineHeight
 
     for (const line of body.lines) {
         textSize(line.size);
@@ -189,7 +191,7 @@ function drawFooter(footer) {
     fill(fgh, 80, 50 , .9)
     stroke(fgh, 100, 70, 1)
     textSize(footer.size);
-    text(footer.text, hmargin+ width/2, height - 3.5* footer.size, width - (2*hmargin))
+    text(footer.text, hmargin+ width/2, height - footer.size, width - (2*hmargin))
 }
 
 function windowResized() {

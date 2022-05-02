@@ -1,5 +1,6 @@
 baseFontSize: 45
-hmargin: 10
+hmargin: 20
+vmargin: 3
 template: printshop
 linesRatio: 0.18
 footerRatio: 0.18
